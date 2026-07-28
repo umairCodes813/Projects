@@ -1,0 +1,305 @@
+:root {
+  --panel: #232019;
+  --panel-edge: #171512;
+  --case-shadow: #0b0a08;
+  --display-bg: #12140d;
+  --phosphor: #ffb400;
+  --phosphor-dim: #7a5300;
+  --phosphor-glow: rgba(255, 180, 0, 0.35);
+  --bone: #ece4d3;
+  --key-face: #2c2822;
+  --key-face-hi: #38332b;
+  --key-shadow: #100e0a;
+  --steel: #5b8fa8;
+  --steel-hi: #78acc4;
+  --brass: #b8935a;
+  --brass-hi: #d3ae76;
+  --danger: #a8564a;
+  --danger-hi: #c06d5f;
+  --rule: rgba(236, 228, 211, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+    ellipse at top,
+    #2a2a2a 0%,
+    #141414 55%,
+    #0a0a0a 100%
+  );
+  font-family: "IBM Plex Mono", monospace;
+  padding: 32px 16px;
+}
+
+.unit {
+  width: 400px;
+  max-width: 100%;
+  background: linear-gradient(180deg, var(--panel) 0%, var(--panel-edge) 100%);
+  border-radius: 22px;
+  padding: 22px 20px 26px;
+  box-shadow:
+    0 2px 0 rgba(255, 255, 255, 0.04) inset,
+    0 40px 60px -20px rgba(0, 0, 0, 0.7),
+    0 0 0 1px var(--case-shadow);
+  position: relative;
+}
+
+.plate {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 4px 14px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 16px;
+}
+.plate .brand {
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 3px;
+  font-size: 12px;
+  color: var(--bone);
+  opacity: 0.55;
+  text-transform: uppercase;
+}
+.plate .model {
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 1px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--brass-hi);
+}
+
+.screen-housing {
+  background: var(--display-bg);
+  border-radius: 10px;
+  padding: 16px 16px 12px;
+  box-shadow:
+    inset 0 3px 10px rgba(0, 0, 0, 0.85),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.screen-housing::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.025) 0px,
+    rgba(255, 255, 255, 0.025) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+.expr {
+  min-height: 18px;
+  font-size: 13px;
+  color: var(--phosphor-dim);
+  text-align: right;
+  letter-spacing: 1px;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  text-shadow: 0 0 6px rgba(122, 83, 0, 0.5);
+}
+.expr::-webkit-scrollbar {
+  display: none;
+}
+.result {
+  font-size: 34px;
+  font-weight: 600;
+  color: var(--phosphor);
+  text-align: right;
+  letter-spacing: 1px;
+  text-shadow:
+    0 0 12px var(--phosphor-glow),
+    0 0 2px var(--phosphor-glow);
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-top: 6px;
+}
+.result::-webkit-scrollbar {
+  display: none;
+}
+
+.status-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 4px 14px;
+}
+.indicators {
+  display: flex;
+  gap: 10px;
+  font-family: "Oswald", sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+.indicators span {
+  color: rgba(236, 228, 211, 0.25);
+  transition:
+    color 0.15s ease,
+    text-shadow 0.15s ease;
+}
+.indicators span.on {
+  color: var(--steel-hi);
+  text-shadow: 0 0 8px rgba(120, 172, 196, 0.6);
+}
+
+.mode-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Oswald", sans-serif;
+  font-size: 10px;
+  letter-spacing: 1px;
+  color: rgba(236, 228, 211, 0.55);
+  cursor: pointer;
+  user-select: none;
+}
+.switch {
+  width: 40px;
+  height: 18px;
+  border-radius: 9px;
+  background: var(--key-shadow);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.7),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+  position: relative;
+  transition: background 0.2s ease;
+}
+.switch .knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, var(--steel-hi), var(--steel));
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease;
+}
+.switch.rad .knob {
+  transform: translateX(22px);
+}
+
+.keys {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+}
+
+button.key {
+  appearance: none;
+  border: none;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--bone);
+  background: linear-gradient(180deg, var(--key-face-hi), var(--key-face));
+  border-radius: 9px;
+  padding: 11px 4px;
+  box-shadow:
+    0 3px 0 var(--key-shadow),
+    0 4px 6px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition:
+    transform 0.06s ease,
+    box-shadow 0.06s ease;
+  position: relative;
+  letter-spacing: 0.3px;
+}
+button.key:active {
+  transform: translateY(3px);
+  box-shadow:
+    0 0 0 var(--key-shadow),
+    0 1px 2px rgba(0, 0, 0, 0.4);
+}
+button.key.fn {
+  background: linear-gradient(180deg, var(--brass-hi), var(--brass));
+  color: #2a2013;
+  font-weight: 600;
+  font-size: 12px;
+}
+button.key.op {
+  background: linear-gradient(180deg, var(--steel-hi), var(--steel));
+  color: #10202a;
+  font-weight: 700;
+  font-size: 16px;
+}
+button.key.danger {
+  background: linear-gradient(180deg, var(--danger-hi), var(--danger));
+  color: #2a1210;
+  font-weight: 700;
+}
+button.key.eq {
+  background: linear-gradient(180deg, #ffcf5c, #e0a324);
+  color: #2a1c02;
+  font-weight: 700;
+  font-size: 16px;
+  grid-column: span 2;
+}
+button.key.wide {
+  grid-column: span 2;
+}
+button.key.digit {
+  font-size: 16px;
+}
+button.key.small {
+  font-size: 11px;
+}
+
+button.key.fn:active {
+  box-shadow:
+    0 0 0 #7a5f34,
+    0 1px 2px rgba(0, 0, 0, 0.4);
+}
+button.key.op:active {
+  box-shadow:
+    0 0 0 #3d6376,
+    0 1px 2px rgba(0, 0, 0, 0.4);
+}
+button.key.danger:active {
+  box-shadow:
+    0 0 0 #6e332b,
+    0 1px 2px rgba(0, 0, 0, 0.4);
+}
+button.key.eq:active {
+  box-shadow:
+    0 0 0 #a67916,
+    0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.footnote {
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: rgba(236, 228, 211, 0.2);
+  margin-top: 16px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 420px) {
+  .unit {
+    padding: 16px 12px 20px;
+  }
+  button.key {
+    padding: 10px 2px;
+    font-size: 13px;
+  }
+}
