@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Precision Recovery Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="bg-shape bg-shape-1"></div>
+  <div class="bg-shape bg-shape-2"></div>
+
+  <main class="app-shell">
+    <section class="card" aria-labelledby="app-title">
+      <header class="card-header">
+        <p class="eyebrow">Math + Precision Demo</p>
+        <h1 id="app-title">Precision Recovery Calculator</h1>
+        <p class="subtitle">
+          Divide a number, then multiply by the same divisor to recover the original value.
+        </p>
+      </header>
+
+      <form id="calc-form" novalidate>
+        <div class="input-grid">
+          <label class="field" for="original-number">
+            <span>Original Number</span>
+            <input
+              id="original-number"
+              name="originalNumber"
+              type="text"
+              inputmode="decimal"
+              autocomplete="off"
+              placeholder="e.g. 100 or 12.75"
+              required
+            />
+          </label>
+
+          <label class="field" for="divisor">
+            <span>Divisor</span>
+            <input
+              id="divisor"
+              name="divisor"
+              type="text"
+              inputmode="decimal"
+              autocomplete="off"
+              placeholder="e.g. 3 or 0.5"
+              required
+            />
+          </label>
+        </div>
+
+        <button id="calculate-btn" type="submit">Calculate</button>
+        <p id="error-message" class="error-message" role="alert" aria-live="polite"></p>
+      </form>
+
+      <section class="results" id="results" aria-live="polite">
+        <article class="result-item">
+          <h2>Division Result</h2>
+          <p id="division-result" class="result-value">-</p>
+        </article>
+
+        <article class="result-item">
+          <h2>Reverse Multiplication Result</h2>
+          <p id="reverse-result" class="result-value">-</p>
+        </article>
+
+        <article class="result-item status-item">
+          <h2>Recovered Original?</h2>
+          <p id="status-result" class="status-badge neutral">Waiting for calculation</p>
+        </article>
+      </section>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
